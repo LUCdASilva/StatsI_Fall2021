@@ -153,4 +153,4 @@ ggplot(expenditure, aes(x=X1, y=Y, shape=Region, color=Region)) +
 
 # Higher per capita income has a positive correlation with housing assistance expenditure for all four regions. However, the regions also have different average expenditures. Furthermore, the slope is higher for some regions (e.g., Northeast) than others (e.g., North Central). This indicates that both income and region (and an interaction between the two) may be related to expenditure, unless there are other causal variables involved that nullify this.
 
-# Source for ggplot: http://www.sthda.com/english/wiki/ggplot2-scatter-plots-quick-start-guide-r-software-and-data-visualization
+# Source for the ggplot: http://www.sthda.com/english/wiki/ggplot2-scatter-plots-quick-start-guide-r-software-and-data-visualization
