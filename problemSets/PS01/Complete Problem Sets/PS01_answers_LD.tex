@@ -1,0 +1,206 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{graphicx,textcomp}
+\usepackage{natbib}
+\usepackage{setspace}
+\usepackage{fullpage}
+\usepackage{color}
+\usepackage[reqno]{amsmath}
+\usepackage{amsthm}
+\usepackage{fancyvrb}
+\usepackage{amssymb,enumerate}
+\usepackage[all]{xy}
+\usepackage{endnotes}
+\usepackage{lscape}
+\newtheorem{com}{Comment}
+\usepackage{float}
+\usepackage{hyperref}
+\newtheorem{lem} {Lemma}
+\newtheorem{prop}{Proposition}
+\newtheorem{thm}{Theorem}
+\newtheorem{defn}{Definition}
+\newtheorem{cor}{Corollary}
+\newtheorem{obs}{Observation}
+\usepackage[compact]{titlesec}
+\usepackage{dcolumn}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{multirow}
+\usepackage{xcolor}
+\newcolumntype{.}{D{.}{.}{-1}}
+\newcolumntype{d}[1]{D{.}{.}{#1}}
+\definecolor{light-gray}{gray}{0.65}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+\lstset{style=mystyle}
+\newcommand{\Sref}[1]{Section~\ref{#1}}
+\newtheorem{hyp}{Hypothesis}
+
+\title{Problem Set 1}
+\date{Due: October 1, 2021}
+\author{Applied Stats/Quant Methods 1}
+
+\begin{document}
+	\maketitle
+	
+	\section*{Instructions}
+	\begin{itemize}
+		\item Please show your work! You may lose points by simply writing in the answer. If the problem requires you to execute commands in \texttt{R}, please include the code you used to get your answers. Please also include the \texttt{.R} file that contains your code. If you are not sure if work needs to be shown for a particular problem, please ask.
+		\item Your homework should be submitted electronically on GitHub in \texttt{.pdf} form.
+		\item This problem set is due before 8:00 on Friday October 1, 2021. No late assignments will be accepted.
+		\item Total available points for this homework is 100.
+	\end{itemize}
+	
+	\vspace{1cm}
+	\section*{Question 1 (50 points): Education}
+
+A school counselor was curious about the average of IQ of the students in her school and took a random sample of 25 students' IQ scores. The following is the data set:\\
+\vspace{.5cm}
+
+\lstinputlisting[language=R, firstline=40, lastline=40]{PS01.R}  
+
+\vspace{1cm}
+
+\begin{enumerate}
+	\item Find a 90\% confidence interval for the average student IQ in the school.\\
+	
+I used a t-test because n is less than 30.
+
+\lstinputlisting[language=R, firstline=47, lastline=48]{PS01_answers_LD.R}  
+
+With a t-test, the 90 percent confidence interval for the average student IQ is [93.95993, 102.92007].
+
+If I were to use a normal distribution, I would do the following:
+
+\lstinputlisting[language=R, firstline=55, lastline=62]{PS01_answers_LD.R}
+
+With a normal distribution, the 90 percent confidence interval for the average student IQ would be [94.13283, 102.74717].\\
+	
+	\item Next, the school counselor was curious  whether  the average student IQ in her school is higher than the average IQ score (100) among all the schools in the country.\\ 
+	
+	\noindent Using the same sample, conduct the appropriate hypothesis test with $\alpha=0.05$.\\
+
+\lstinputlisting[language=R, firstline=70, lastline=75]{PS01_answers_LD.R}
+
+The p-value is very high (.7215), much higher than the .05 significance level. We cannot reject the null hypothesis that the school's average IQ is equal or less than the average school IQ score (100).
+
+Source for one-sided t-test: http://www.sthda.com/english/wiki/one-sample-t-test-in-r
+
+
+\end{enumerate}
+
+\newpage
+
+	\section*{Question 2 (50 points): Political Economy}
+
+\noindent Researchers are curious about what affects the amount of money communities spend on addressing homelessness. The following variables constitute our data set about social welfare expenditures in the USA. \\
+\vspace{.5cm}
+
+
+\begin{tabular}{r|l}
+	\texttt{State} &\emph{50 states in US} \\
+	\texttt{Y} & \emph{per capita expenditure on shelters/housing assistance in state}\\
+	\texttt{X1} &\emph{per capita personal income in state} \\
+	\texttt{X2} &  \emph{Number of residents per 100,000 that are "financially insecure" in state}\\
+	\texttt{X3} &  \emph{Number of people per thousand residing in urban areas in state} \\
+	\texttt{Region} &  \emph{1=Northeast, 2= North Central, 3= South, 4=West} \\
+\end{tabular}
+
+\vspace{.5cm}
+\noindent Explore the \texttt{expenditure} data set and import data into \texttt{R}.
+\vspace{.5cm}
+\lstinputlisting[language=R, firstline=54, lastline=54]{PS01.R}  
+\vspace{.5cm}
+\begin{itemize}
+
+\item
+Please plot the relationships among \emph{Y}, \emph{X1}, \emph{X2}, and \emph{X3}? What are the correlations among them (you just need to describe the graph and the relationships among them)?
+\vspace{.5cm}
+
+\graphicspath{ {./Images/} }
+
+\includegraphics[scale=.6]{Rplot01}
+\includegraphics[scale=.6]{Rplot02}
+
+\includegraphics[scale=.6]{Rplot03}
+\includegraphics[scale=.6]{Rplot04}
+
+\includegraphics[scale=.6]{Rplot05}
+\includegraphics[scale=.6]{Rplot06}
+
+\lstinputlisting[language=R, firstline=90, lastline=106]{PS01_answers_LD.R}  
+
+
+Y and X1: These exhibit a positive correlation that has medium strength (r = .53). The slope is not very steep. Datapoints are distributed more at the lower values of Y and X1. 
+
+
+Y and X2: These exhibit a positive correlation that is not very strong (at least linearly) (r = .45). Datapoints are distributed more at medium values of Y and low values of X2. This is a non-linear correlation. As X2 increases, Y decreases and then increases. There is an overall slight positive relationship. 
+
+
+Y and X3: These exhibit a positive correlation that is not very strong (r = .46). The slope is moderate. Datapoints are distributed relatively evenly, but with fewer at high values of Y and X3.
+
+
+X1 and X2: These exhibit a positive correlation that is weak (r = .21). The slope is quite flat. Datapoints are distributed relatively evenly for X1 and at the lower values for X2.
+
+
+X1 and X3: These exhibit a positive correlation that is moderately strong (r = .60). The slope is not very steep. Datapoints are distributed relatively evenly for X1 and are sparser at high values of X3. 
+
+
+X2 and X3: These exhibit a positive correlation that is not very strong (r = .22). There is only a slight slope. Datapoints are distributed relatively evenly for X2 and are sparser at high values of X3. \\
+
+
+\item
+Please plot the relationship between \emph{Y} and \emph{Region}? On average, which region has the highest per capita expenditure on housing assistance?
+\vspace{.5cm}
+
+\includegraphics{Rplot07}
+
+\lstinputlisting[language=R, firstline=118, lastline=128]{PS01_answers_LD.R}  
+
+The West (4) has the highest per capita expenditure on housing assistance.\\
+
+\item
+Please plot the relationship between \emph{Y} and \emph{X1}? Describe this graph and the relationship. Reproduce the above graph including one more variable \emph{Region} and display different regions with different types of symbols and colors.
+
+\includegraphics{Rplot01}
+
+\lstinputlisting[language=R, firstline=135, lastline=136]{PS01_answers_LD.R} 
+
+Above is a plot of the bivariate relationship between Y and X1. These exhibit a positive correlation that has medium strength (r = .53). The slope is not very steep. Datapoints are distributed more at the mid-to-low values of Y and X1.\\
+
+\includegraphics{Rplot08}
+
+\lstinputlisting[language=R, firstline=145, lastline=152]{PS01_answers_LD.R} 
+
+Above is a graph with the bivariate relationship separated by region. Higher per capita income has a positive correlation with housing assistance expenditure for all four regions. However, the regions also have different average expenditures. Furthermore, the slope is higher for some regions (e.g., Northeast) than others (e.g., North Central). This indicates that both income and region (and an interaction effect between the two) may be related to expenditure, unless there are other causal variables involved that nullify this.
+
+Source for ggplot: http://www.sthda.com/english/wiki/ggplot2-scatter-plots-quick-start-guide-r-software-and-data-visualization
+
+\end{itemize}
+
+
+\end{document}
