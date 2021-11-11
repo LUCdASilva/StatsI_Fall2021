@@ -1,0 +1,221 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{graphicx,textcomp}
+\usepackage{natbib}
+\usepackage{setspace}
+\usepackage{fullpage}
+\usepackage{color}
+\usepackage[reqno]{amsmath}
+\usepackage{amsthm}
+\usepackage{fancyvrb}
+\usepackage{amssymb,enumerate}
+\usepackage[all]{xy}
+\usepackage{endnotes}
+\usepackage{lscape}
+\newtheorem{com}{Comment}
+\usepackage{float}
+\usepackage{hyperref}
+\newtheorem{lem} {Lemma}
+\newtheorem{prop}{Proposition}
+\newtheorem{thm}{Theorem}
+\newtheorem{defn}{Definition}
+\newtheorem{cor}{Corollary}
+\newtheorem{obs}{Observation}
+\usepackage[compact]{titlesec}
+\usepackage{dcolumn}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{multirow}
+\usepackage{xcolor}
+\newcolumntype{.}{D{.}{.}{-1}}
+\newcolumntype{d}[1]{D{.}{.}{#1}}
+\definecolor{light-gray}{gray}{0.65}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+\lstset{style=mystyle}
+\newcommand{\Sref}[1]{Section~\ref{#1}}
+\newtheorem{hyp}{Hypothesis}
+
+\title{Problem Set 3}
+\date{Due: November 12, 2021}
+\author{Applied Stats/Quant Methods 1}
+
+
+\begin{document}
+	\maketitle
+	\section*{Instructions}
+	\begin{itemize}
+		\item Please show your work! You may lose points by simply writing in the answer. If the problem requires you to execute commands in \texttt{R}, please include the code you used to get your answers. Please also include the \texttt{.R} file that contains your code. If you are not sure if work needs to be shown for a particular problem, please ask.
+		\item Your homework should be submitted electronically on GitHub in \texttt{.pdf} form.
+		\item This problem set is due before class on Friday November 12, 2021. No late assignments will be accepted.
+		\item Total available points for this homework is 80.
+	\end{itemize}
+
+	
+		\vspace{.25cm}
+	
+\noindent In this problem set, you will run several regressions and create an add variable plot (see the lecture slides) in \texttt{R} using the \texttt{incumbents\_subset.csv} dataset. Include all of your code.
+
+	\vspace{.5cm}
+\section*{Question 1} %(20 points)}
+\vspace{.25cm}
+\noindent We are interested in knowing how the difference in campaign spending between incumbent and challenger affects the incumbent's vote share. 
+	\begin{enumerate}
+		\item Run a regression where the outcome variable is \texttt{voteshare} and the explanatory variable is \texttt{difflog}.	\vspace{.5cm}
+\lstinputlisting[language=R, firstline=5, lastline=10]{PS3_answers_LD.R}
+		\vspace{.25cm}
+\lstinputlisting[language=R, firstline=19, lastline=20]{PS3_answers_LD.R}
+		\vspace{.25cm}
+difflog has a coefficient of .042, SE of .00097, t-value of 43.04, and p-value of \textless0.0000000000000002 (essentially 0).
+The intercept is .579, with a SE of .00225, t-value of 257.19, and p-value of \textless0.0000000000000002 (essentially 0).
+		\vspace{1cm}
+		\item Make a scatterplot of the two variables and add the regression line.
+		\vspace{.5cm}
+\lstinputlisting[language=R, firstline=28, lastline=36]{PS3_answers_LD.R}
+		\vspace{.25cm}
+\includegraphics{Q1-2c}		
+		\vspace{1cm}
+		\item Save the residuals of the model in a separate object.
+		\vspace{.5cm}
+\lstinputlisting[language=R, firstline=39, lastline=40]{PS3_answers_LD.R}	
+		\vspace{1cm}		
+		\item Write the prediction equation.
+		\vspace{.5cm}
+\lstinputlisting[language=R, firstline=45, lastline=45]{PS3_answers_LD.R}
+		\vspace{.25cm}
+The prediction equation is: voteshare = .579 + .042*difflog
+		\vspace{1cm}		
+		
+	\end{enumerate}
+	
+\newpage
+
+\section*{Question 2}% (20 points)}
+\noindent We are interested in knowing how the difference between incumbent and challenger's spending and the vote share of the presidential candidate of the incumbent's party are related.	\vspace{.25cm}
+	\begin{enumerate}
+		\item Run a regression where the outcome variable is \texttt{presvote} and the explanatory variable is \texttt{difflog}.	
+		\vspace{.5cm}
+\lstinputlisting[language=R, firstline=57, lastline=58]{PS3_answers_LD.R}
+		\vspace{.25cm}
+difflog has a coefficient of .024, SE of .00136, t-value of 17.54, and p-value of \textless0.0000000000000002 (essentially 0).
+The intercept is .508, with a SE of .00316, t-value of 160.60, and p-value of \textless0.0000000000000002 (essentially 0).
+		\vspace{1cm}
+		\item Make a scatterplot of the two variables and add the regression line.
+		\vspace{.5cm}
+\lstinputlisting[language=R, firstline=66, lastline=73]{PS3_answers_LD.R}
+		\vspace{.25cm}
+\includegraphics{Q2-2c}	
+		\vspace{1cm}
+		\item Save the residuals of the model in a separate object.	
+		\vspace{.5cm}
+\lstinputlisting[language=R, firstline=76, lastline=77]{PS3_answers_LD.R}		
+		\vspace{1cm}	
+		\item Write the prediction equation.
+\lstinputlisting[language=R, firstline=82, lastline=82]{PS3_answers_LD.R}			
+The prediction equation is: presvote = .508 + .024*difflog		
+		\vspace{1cm}	
+	\end{enumerate}
+	
+	\newpage	
+\section*{Question 3}% (20 points)}
+
+\noindent We are interested in knowing how the vote share of the presidential candidate of the incumbent's party is associated with the incumbent's electoral success.
+	\vspace{.25cm}
+	\begin{enumerate}
+		\item Run a regression where the outcome variable is \texttt{voteshare} and the explanatory variable is \texttt{presvote}.
+			\vspace{.5cm}
+\lstinputlisting[language=R, firstline=93, lastline=94]{PS3_answers_LD.R}				
+			\vspace{.25cm}
+presvote has a coefficient of .388, SE of .01349, t-value of 28.76, and p-value of \textless0.0000000000000002 (essentially 0).
+The intercept is .441 with a SE of .00760, t-value of 58.08, and p-value of \textless0.0000000000000002 (essentially 0).
+			\vspace{1cm}
+		\item Make a scatterplot of the two variables and add the regression line. 
+			\vspace{.5cm}
+\lstinputlisting[language=R, firstline=102, lastline=110]{PS3_answers_LD.R}	
+			\vspace{.25cm}
+\includegraphics{Q3-2c}				
+			\vspace{1cm}
+		\item Write the prediction equation.
+			\vspace{.5cm}
+\lstinputlisting[language=R, firstline=113, lastline=113]{PS3_answers_LD.R}	
+			\vspace{.25cm}
+The prediction equation is: voteshare = .441 + .388*presvote
+			\vspace{1cm}
+	\end{enumerate}
+	
+
+\newpage	
+\section*{Question 4}% (20 points)}
+\noindent The residuals from part (a) tell us how much of the variation in \texttt{voteshare} is $not$ explained by the difference in spending between incumbent and challenger. The residuals in part (b) tell us how much of the variation in \texttt{presvote} is $not$ explained by the difference in spending between incumbent and challenger in the district.
+	\begin{enumerate}
+		\item Run a regression where the outcome variable is the residuals from Question 1 and the explanatory variable is the residuals from Question 2.	
+			\vspace{.5cm}
+\lstinputlisting[language=R, firstline=124, lastline=125]{PS3_answers_LD.R}	
+			\vspace{.25cm}
+diffpres\_resid has a coefficient of .257, SE of .01176, t-value of 21.84, and p-value of \textless0.0000000000000002 (essentially 0).
+The intercept is essentially 0, with a SE of .00130, t-value of 0, and p-value of 1 (i.e. there is no constant).
+			\vspace{1cm}
+		\item Make a scatterplot of the two residuals and add the regression line.
+			\vspace{.5cm}
+\lstinputlisting[language=R, firstline=133, lastline=140]{PS3_answers_LD.R}	
+			\vspace{.25cm}
+\includegraphics{Q4-2c}	
+			\vspace{1cm}
+		\item Write the prediction equation.
+			\vspace{.5cm}
+\lstinputlisting[language=R, firstline=143, lastline=143]{PS3_answers_LD.R}	
+			\vspace{.25cm}
+The prediction equation is: diffvote\_resid = .257*diffpres\_resid
+	\end{enumerate}	
+	\newpage	
+
+\section*{Question 5}% (20 points)}
+\noindent What if the incumbent's vote share is affected by both the president's popularity and the difference in spending between incumbent and challenger? 
+	\begin{enumerate}
+		\item Run a regression where the outcome variable is the incumbent's \texttt{voteshare} and the explanatory variables are \texttt{difflog} and \texttt{presvote}.	
+				\vspace{.5cm}
+\lstinputlisting[language=R, firstline=154, lastline=155]{PS3_answers_LD.R}	
+				\vspace{.25cm}
+difflog has a coefficient of .036, SE of .00095, t-value of 37.59, and p-value of \textless0.0000000000000002 (essentially 0).
+presvote has a coefficient of .257, SE of .01176, t-value of 21.84, and p-value of \textless0.0000000000000002 (essentially 0).
+The intercept is .449, with a SE of .00633, t-value of 70.88, and p-value of \textless0.0000000000000002 (essentially 0).
+				\vspace{1cm}
+		\item Write the prediction equation.
+				\vspace{.5cm}
+\lstinputlisting[language=R, firstline=164, lastline=164]{PS3_answers_LD.R}	
+				\vspace{.25cm}
+The prediction equation is: voteshare = .449 + .036*difflog + .257*presvote
+				\vspace{1cm}
+		\item What is it in this output that is identical to the output in Question 4? Why do you think this is the case?
+				\vspace{.5cm}
+				
+The coefficient, SE, t-value, and p-value for presvote (with voteshare as the response variable) in Question 5 are identical to those for diffpres\_resid (with diffvote\_resid as the response variable) in Question 4. They both have a coefficient of .257, SE of .01176, t-value of 21.84, and p-value of \textless0.0000000000000002 (essentially 0). This is the case because of how these variables are associated to one another. For Question 4, diffvote\_resid is the component of variation within voteshare that cannot be explained by difflog. Meanwhile, diffpres\_resid is the component of variation within presvote that also cannot be explained by difflog. 
+
+In the Question 5 equation (voteshare = .449 + .036*difflog + .257*presvote), the Beta-1 term (.036*difflog) is accounting for the variation within voteshare that $is$ associated with difflog. The model attributes the remaining variation to presvote. In the Question 4 model, both variables have removed the variation explained by difflog. In the Question 5 model, the control variable difflog similarly allows us to see the variation in voteshare that is not attributable to difflog (the Beta-2 term). Both prediction equations can therefore look at the relationship between voteshare and presvote without difflog. Therefore, the coefficients, SEs, t-values, and p-values are the same for diffpres\_resid and presvote.
+	%	\item Reflect on your finding. Don't write anything. Just think about it.
+	\end{enumerate}
+\end{document}
